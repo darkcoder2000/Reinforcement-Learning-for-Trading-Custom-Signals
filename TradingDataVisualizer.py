@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 def plot_macd(df):
+    # Convert date string to datetime object and set as index
+    df["Date"] = pd.to_datetime(df["Date"])
+    df.set_index("Date", inplace=True)
+
     # Calculate the MACD
     df["macd"] = ta.trend.MACD(df["Close"]).macd()
     df["macd_signal"] = ta.trend.MACD(df["Close"]).macd_signal()
